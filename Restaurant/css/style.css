@@ -31,15 +31,5 @@ ul.breadcrumb {
     color: #01447e;
     text-decoration: underline;
   }
-  .button {
-    background-color: #1d1b8f; /* Blue */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-  }
+  
+   

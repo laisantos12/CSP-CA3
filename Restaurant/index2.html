@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script src="js/myscript2.js"></script>
+    <!--My CSS-->
+    <link rel="stylesheet" href="./css/style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="college dublin client side application" />
+    <title>Restaurant</title>
+</head>
+
+<body>
+    <div>
+        <nav>
+            <ul>
+                <!--Linking the next page-->
+
+                <ul class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="page2.html">Page 2</a></li>
+
+                </ul>
+            </ul>
+        </nav>
+    </div>
+    <div class="section" id="staff-password">
+        <h2>Staff Password</h2>
+        <div>
+            <label for="password">Enter password:</label>
+            <input id="password" type="password" oninput="validateInput(event)" />
+        </div>
+        <div id="error-messages"></div>
+    </div>
+</body>
+
+</html>
