@@ -1,29 +1,197 @@
-chkpwd = function (validate) {
-    var str = document.getElementById().value;
-    if (str.length < 8) {
-        document.getElementById("demo").innerHTML = "Password must be 8 char!";
-        document.getElementById("demo").style.color = "Red";
-        return ("Too Short!");
-    } else if (str.search(/[0-9]/) == -1) {
-        document.getElementById("demo").innerHTML = "At least 1 numeric value must be entered!";
-        document.getElementById("demo").style.color = "Red";
-        return ("No number");
-
-    } else if (str.search(/[a-z]/) == -1) {
-        document.getElementById("demo").innerHTML = "At least 1 small letter must be entered!";
-        document.getElementById("demo").style.color = "Red";
-        return ("No letter");
-    } else if (str.search(/[A-Z]/) == -1) {
-        document.getElementById("demo").innerHTML = "At least 1 uppercase letter must be entered!";
-        document.getElementById("demo").style.color = "Red";
-        return ("No Uppercase letter");
-    } else if (str.search(/[!\@\#\$\^\&\.\,\;\(\)\+\:\_]/) == -1) {
-        document.getElementById("demo").innerHTML = "At least 1 special character must be entered!";
-        document.getElementById("demo").style.color = "Red";
-        return ("No special character");
-
+// Password Validation Section
+function removeElementById(id) {
+    if (document.getElementById(id)) {
+        document.getElementById(id).remove();
     }
-    document.getElementById("demo").innerHTML = "Successful!";
-    document.getElementById("demo").style.color = "Green";
-    return ("ok");
+}
+
+function addErrorParagraph(id, text) {
+    if (!document.getElementById(id)) {
+        var tempParagraph = document.createElement('p');
+        tempParagraph.classList.add('error');
+        tempParagraph.setAttribute('id', id);
+        tempParagraph.appendChild(document.createTextNode(text));
+        document.getElementById('error-messages').insertAdjacentElement('beforeend', tempParagraph);
+    }
+}
+
+window.validateInput = function (event) {
+    var value = event.target.value;
+    // lowercase validation
+    if ((/[a-z]/.test(value))) {
+        removeElementById('lowercase-error-msg');
+    } else {
+        addErrorParagraph('lowercase-error-msg', 'The password must have at least one lowercase letter.');
+    }
+    // uppercase validation
+    if ((/[A-Z]/.test(value))) {
+        removeElementById('uppercase-error-msg');
+    } else {
+        addErrorParagraph('uppercase-error-msg', 'The password must have at least one uppercase letter.');
+    }
+    // special characters validation
+    if ((/[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(value))) {
+        removeElementById('special-char-error-msg');
+    } else {
+        addErrorParagraph('special-char-error-msg', 'It must contain one digit and one special character.');
+    }
+    // min length validation
+    if (value.length < 8) {
+        addErrorParagraph('length-error-msg', 'And it must be at least eight characters long.');
+    } else {
+        removeElementById('length-error-msg');
+    }
+}
+//Get Btn And Create Function
+document.getElementById('myBtn').addEventListener('click', getData);
+
+function getData() {
+    // console.log('test');
+
+    //Get API
+    fetch('https://randomuser.me/api/?results=100')
+        .then(res => res.json())
+        .then(data => {
+            //console.log(data);
+
+            let author = data.results;
+            // console.log(author);
+
+            //Get Data Value
+            let output = "<h2><center>Get User Data</center></h2>";
+
+            //Get Data Loop Through
+            author.slice(-5).forEach(function (lists) {
+                output += `
+                <div class="container">
+                    <div class="card mt-4 bg-light">
+                        <ul class="list-group">
+                            <li class="list-group-item"><h2>Name: ${lists.name.first}</h2></li>
+                            <li class="list-group-item"><img src="${lists.picture.large}"></li>
+                            <li class="list-group-item">Phone Number: ${lists.cell}</li>
+                            <li class="list-group-item">DOB: ${lists.dob.date}</li>
+                            <li class="list-group-item">Age: ${lists.dob.age}</li>
+                            <li class="list-group-item">Email ID: ${lists.email}</li>
+                            <li class="list-group-item">Gender: ${lists.gender}</li>
+                            <li class="list-group-item">City: ${lists.location.city}</li>
+                            <li class="list-group-item">Country: ${lists.location.country}</li>
+                            <li class="list-group-item">PostCode: ${lists.location.postcode}</li>
+                        </ul>
+                    </div>
+                </div> `;
+            });
+
+            //Show On Our Screen All Data
+            document.getElementById('output').innerHTML = output;
+
+        });
+};
+//Creating the menu
+
+if (document.readyState == 'loading') {
+    document.addEventListener('DOMContentLoaded', ready)
+} else {
+    ready()
+}
+
+function ready() {
+    var removeCartItemButtons = document.getElementsByClassName('btn-danger')
+    for (var i = 0; i < removeCartItemButtons.length; i++) {
+        var button = removeCartItemButtons[i]
+        button.addEventListener('click', removeCartItem)
+    }
+
+    var quantityInputs = document.getElementsByClassName('cart-quantity-input')
+    for (var i = 0; i < quantityInputs.length; i++) {
+        var input = quantityInputs[i]
+        input.addEventListener('change', quantityChanged)
+    }
+    //add itens to the cart
+    var addToCartButtons = document.getElementsByClassName('shop-item-button')
+    for (var i = 0; i < addToCartButtons.length; i++) {
+        var button = addToCartButtons[i]
+        button.addEventListener('click', addToCartClicked)
+    }
+
+    document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
+}
+
+function purchaseClicked() {
+    alert('Thank you for your purchase')
+    var cartItems = document.getElementsByClassName('cart-items')[0]
+    while (cartItems.hasChildNodes()) { // while loop goes through all the item into cart row till the cart be empty
+        cartItems.removeChild(cartItems.firstChild)
+    }
+    updateCartTotal() //update the total in the cart
+}
+function removeCartItem(event) {
+    var buttonClicked = event.target
+    buttonClicked.parentElement.parentElement.remove()
+    updateCartTotal()
+}
+
+function quantityChanged(event) {
+    var input = event.target
+    if (isNaN(input.value) || input.value <= 0) {
+        input.value = 1
+    }
+    updateCartTotal()
+}
+
+function addToCartClicked(event) {
+    var button = event.target
+    var shopItem = button.parentElement.parentElement
+    var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
+    var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
+    var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
+    addItemToCart(title, price, imageSrc)
+    updateCartTotal()
+}
+
+
+function addItemToCart(title, price, imageSrc) {
+    var cartRow = document.createElement('div')
+    cartRow.classList.add('cart-row')
+    var cartItems = document.getElementsByClassName('cart-items')[0]
+    var cartItemNames = cartItems.getElementsByClassName('cart-item-title')
+    for (var i = 0; i < cartItemNames.length; i++) {
+        if (cartItemNames[i].innerText == title) {
+            alert('This item is already added to the cart') //dont allow the same item in the cart
+            return
+        }
+    }
+
+    var cartRowContents = `
+		<div class="cart-item cart-column">
+			<img class="cart-item-image" src="${imageSrc}" width="100"
+			height="100">
+			<span class="cart-item-title">${title}</span>
+		</div>
+		<span class="cart-price cart-column">${price}</span>
+		<div class="cart-quantity cart-column">
+			<input class="cart-quantity-input" type="number" value="1">
+		<button class="btn btn-danger" type="button">REMOVE</button>
+		</div>`
+    cartRow.innerHTML = cartRowContents
+    cartItems.append(cartRow)
+    cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
+    cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
+}
+
+
+function updateCartTotal() {
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
+    var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+    var total = 0
+    for (var i = 0; i < cartRows.length; i++) {
+        var cartRow = cartRows[i]
+        var priceElement = cartRow.getElementsByClassName('cart-price')[0]
+        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')
+        [0]
+        var price = parseFloat(priceElement.innerText.replace('€', ''))
+        var quantity = quantityElement.value
+        total = total + (price * quantity)
+    }
+    total = Math.round(total * 100) / 100 //it gets round numbers
+    document.getElementsByClassName('cart-total-price')[0].innerText = '€' + total
 }

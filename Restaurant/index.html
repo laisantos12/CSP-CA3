@@ -3,11 +3,17 @@
 
 <head>
 
-    <script src="js/myscript.js"></script>
     <!--My CSS-->
     <link rel="stylesheet" href="./css/style.css">
+    <meta charset="utf-8" />
 
-    <title>Restaurant</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="college dublin client side application" />
+
+<body style="background-color: black;"></body>
+<title>Restaurant</title>
 </head>
 
 <body>
@@ -18,25 +24,178 @@
 
                 <ul class="breadcrumb">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="page2.html">Page 2</a></li>
+                    <li><a href="index1.html">Page 1</a></li>
 
                 </ul>
             </ul>
         </nav>
     </div>
-    <div>
-        <form>
-            <h1>Staff Password Validator</h1>
-            <h2>Enter password: </h2>
-            <p id="demo"></p>
-            <input id="pass" type="text" size="8" maxlength="8"></input>
-            <input type="button" value="Check Password" onclick="chkpwd"></input>
-        </form>
+    <div class="section" id="staff-password">
+        <div class="myDiv">
 
 
-
-
+            <h2>Staff Password</h2>
+            <div>
+                <label for="password">Enter password:</label>
+                <input id="password" type="password" oninput="validateInput(event)" />
+            </div>
+        </div>
+        <div id="error-messages"></div>
     </div>
+
+    <div class="container">
+        <h1 class="display-4 mt-3">Customers</h1>
+        <button class="btn btn-primary" id="myBtn">Get Data</button>
+    </div>
+    <div id="output"></div>
+
+    </header>
+    <section class="container content-section">
+        <section class="container content-section">
+            <h2 class="section-header">Menu Options</h2>
+            <h3>Starters</h3>
+            <div class="shop-items">
+
+                <div class="shop-item">
+                    <span class="shop-item-title">Herb and chilli calamari</span>
+                    <img class="shop-item-image" src="image/lemon--chilli-and-herb-squid.jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">€12.99</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO ORDER</button>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <span class="shop-item-title">Scallop shell pies</span>
+                    <img class="shop-item-image" src="image/OIP.jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">€14.99</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO ORDER</button>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <span class="shop-item-title">Burrata bruschetta</span>
+                    <img class="shop-item-image" src="image/OIP (1).jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">€9.99</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO ORDER</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container content-section">
+            <h2 class="section-header"></h2>
+            <h3>Main</h3>
+            <div class="shop-items">
+                <div class="shop-item">
+                    <span class="shop-item-title">Mustard-stuffed chicken</span>
+                    <img class="shop-item-image" src="image/OIP (2).jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">€22.00</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO ORDER</button>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <span class="shop-item-title">Spicy root & lentil casserole</span>
+                    <img class="shop-item-image" src="image/R383d0c12d5e860b8ffdd1d5162f62ade.jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">€32.00</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO ORDER</button>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <span class="shop-item-title">Spinach & ricotta gnocchi</span>
+                    <img class="shop-item-image" src="image/Tomato-Spinach-Ricotta-Baked-Gnocchi-848x477.jpeg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">€24.00</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO ORDER</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="container content-section">
+            <h2 class="section-header"></h2>
+            <h3>Dessert</h3>
+            <div class="shop-items">
+                <div class="shop-item">
+                    <span class="shop-item-title">Tiramisu layer cake</span>
+                    <img class="shop-item-image" src="image/Rda94bec9b9d92cc52fd2e4e69e865d36.jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">€9.00</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO ORDER</button>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <span class="shop-item-title">White chocolat cheesecake</span>
+                    <img class="shop-item-image" src="image/1.jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">€12.00</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO ORDER</button>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <span class="shop-item-title">English custard</span>
+                    <img class="shop-item-image" src="image/2.jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">€10.00</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO ORDER</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="container content-section">
+            <h2 class="section-header"></h2>
+            <h3>Drinks</h3>
+            <div class="shop-items">
+                <div class="shop-item">
+                    <span class="shop-item-title">Coca-cola</span>
+                    <img class="shop-item-image" src="image/OIP (3).jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">€3.00</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO ORDER</button>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <span class="shop-item-title">Beer</span>
+                    <img class="shop-item-image" src="image/3.jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">€5.00</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO ORDER</button>
+                    </div>
+                </div>
+                <div class="shop-item">
+                    <span class="shop-item-title">Water</span>
+                    <img class="shop-item-image" src="image/OIP (4).jpg">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">€1.50</span>
+                        <button class="btn btn-primary shop-item-button" type="button">ADD TO ORDER</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="container content-section">
+            <h2 class="section-header">ORDERS</h2>
+            <div class="cart-items">
+            </div>
+            <div class="cart-total">
+                <strong class="cart-total-title">Total</strong>
+                <span class="cart-total-price">€0</span>
+            </div>
+            <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+        </section>
+        <footer class="main-footer">
+            <div class="container main-footer-container">
+                Brazilian's Tasty Restaurant @Lais Santos
+
+            </div>
+            <!--GitHub Link-->
+            <a class="links" href="https://github.com/laisantos12/CSP-CA3.git" target="_blank">GitHub</a>
+        </footer>
+
+
+        <script src="js/myscript.js"></script>
 </body>
 
 </html>
